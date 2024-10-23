@@ -30,7 +30,14 @@ ProPresenter7.event_bus.on('playlist/active', (data) => {
 ProPresenter7.start_watching();
 
 midiImplementation.midi_event_bus.on('midi',async  (note, velocity, on) => {
+    if(note >=  50){
+        let velocity_add = (note - 49) * 127;
+        velocity += velocity_add;
+        note = 18;
+    }
+
     switch (note) {
+        // not a reserved note
         case 18:
             log('presentation', presentations[velocity])
             let presentation_name = presentations[velocity];
